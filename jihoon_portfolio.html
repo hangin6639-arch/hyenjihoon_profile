@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>현지훈 / Jihoon Hyun</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #fff;
+    color: #000;
+    max-width: 680px;
+    margin: 60px auto;
+    padding: 0 20px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  h1 {
+    font-size: 22px;
+    margin: 0 0 4px 0;
+    font-weight: bold;
+  }
+  #tagline {
+    font-style: italic;
+    margin: 0 0 10px 0;
+    color: #333;
+  }
+  #subtitle {
+    margin: 0 0 6px 0;
+  }
+  #intro {
+    margin: 0 0 18px 0;
+  }
+  #nav {
+    margin-top: 10px;
+  }
+  #nav a {
+    margin-right: 16px;
+    font-size: 15px;
+  }
+  .back {
+    display: block;
+    margin-bottom: 24px;
+  }
+  section {
+    display: none;
+  }
+  section h2 {
+    font-size: 17px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 4px;
+  }
+  section h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 16px 0 4px 0;
+  }
+  ul {
+    margin: 6px 0 20px 0;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  .dim {
+    color: #555;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HOME VIEW -->
+<div id="home">
+  <h1>현지훈 / Jihoon Hyun</h1>
+  <p id="tagline">Thinking is the Compass of Life.</p>
+  <p id="subtitle">AI Engineer · Builder · Researcher</p>
+  <p id="intro">
+    I build systems.<br>
+    I study intelligence.<br>
+    I write ideas.
+  </p>
+  <div id="nav">
+    <a href="#" onclick="show('information'); return false;">[Information]</a>
+    <a href="#" onclick="show('projects'); return false;">[Projects]</a>
+    <a href="#" onclick="show('writing'); return false;">[Writing]</a>
+    <a href="#" onclick="show('research'); return false;">[Research]</a>
+  </div>
+</div>
+
+<!-- SECTION: Information -->
+<section id="information">
+  <a class="back" href="#" onclick="goHome(); return false;">← Back</a>
+  <h2>Information</h2>
+
+  <h3>About</h3>
+  <ul>
+    <li>Business Administration student, Jeju National University (leave of absence)</li>
+    <li>Long-term interest: co-founding a startup in AI, robotics, or adjacent high-tech fields</li>
+    <li>Targeting Silicon Valley and graduate research in the medium term</li>
+  </ul>
+
+  <h3>Contact</h3>
+  <ul>
+    <li>Email: <a href="mailto:hangin6639@gmail.com">hangin6639@gmail.com</a></li>
+    <li>GitHub: <a href="https://github.com/hangin6639-arch" target="_blank">github.com/hangin6639-arch</a></li>
+    <li>LinkedIn: <a href="https://www.linkedin.com/in/지훈-현-302aba3a5" target="_blank">linkedin.com/in/지훈-현</a></li>
+    <li>Blog: <a href="https://blog.naver.com/hjh-1209" target="_blank">blog.naver.com/hjh-1209</a></li>
+  </ul>
+
+  <h3>Skills</h3>
+  <ul>
+    <li>Languages: Python, C++, C</li>
+    <li>ML/AI: PyTorch, Scikit-learn, Hugging Face</li>
+    <li>Web: React, Vite</li>
+    <li>Data: KR-SBERT, GIS/SAR pipeline, KRX API, DART</li>
+    <li>Infra: AWS, Render.com</li>
+  </ul>
+
+  <h3>Languages</h3>
+  <ul>
+    <li>English — Advanced (TOEIC 725, 수능 영어 2등급)</li>
+    <li>French · Chinese · Japanese — currently learning (Duolingo)</li>
+  </ul>
+
+  <h3>Certifications</h3>
+  <ul>
+    <li>Google — AI Fundamentals (2026)</li>
+    <li>Google — AI for Writing &amp; Communicating (2026)</li>
+    <li>Google — AI for Research &amp; Insights (2026)</li>
+    <li>Google — AI for Brainstorming &amp; Planning (2026)</li>
+    <li>무인 멀티콥터 4급 (Drone Pilot, Level 4)</li>
+  </ul>
+
+  <h3>Beyond Engineering</h3>
+  <ul>
+    <li>Naver 지식iN "고수" — Reptiles &amp; Amphibians. Top ~0.49% of ≈400,000 contributors (158 answers, 74.5% acceptance, since 2017).</li>
+    <li>Music — Piano (~3 yrs, bronze at a regional concours), Cello (3 yrs); currently learning Guitar &amp; Violin.</li>
+  </ul>
+</section>
+
+<!-- SECTION: Projects -->
+<section id="projects">
+  <a class="back" href="#" onclick="goHome(); return false;">← Back</a>
+  <h2>Projects</h2>
+
+  <ul>
+    <li>
+      <strong>2026 AWS SPACE Bootcamp &amp; Hackathon</strong> — Excellent Award (우수상)
+      <br><span class="dim">SAR satellite data analysis pipeline; GIS preprocessing + ML inference on AWS infrastructure.</span>
+    </li>
+    <li>
+      <strong>조코딩 (joecoding) OpenAPI 해커톤</strong> — 예선 참가상
+      <br><span class="dim">LLM-API prototype built under time constraint; advanced to the preliminary round and received a participation award including $200 in API credits.</span>
+    </li>
+    <li>
+      <strong>KRX 시장 공개 데이터 기반 무차입공매도 이상거래 탐지 시스템</strong>
+      <br><span class="dim">Three-stage ML pipeline: Isolation Forest → PU Learning / LSTM Autoencoder → EVT/GPD dynamic thresholds. KRX National University Securities Competition. With 박재성.</span>
+    </li>
+    <li>
+      <strong>CONTEC 마케팅 프로젝트 — 브랜드 갭 분석</strong>
+      <br><span class="dim">NLP pipeline (KR-SBERT, TF-IDF, cosine similarity) measuring identity–perception gap for a Korean space-data infrastructure company. University project.</span>
+    </li>
+    <li>
+      <strong>제주 SW주니어 해커톤대회 (Kakao)</strong> — Prize (중학교 수상)
+      <br><span class="dim">Early competitive-programming project recognized at a Kakao-sponsored youth hackathon.</span>
+    </li>
+  </ul>
+</section>
+
+<!-- SECTION: Writing -->
+<section id="writing">
+  <a class="back" href="#" onclick="goHome(); return false;">← Back</a>
+  <h2>Writing</h2>
+
+  <!--
+    TODO: 아래 8개를 실제 블로그 글로 교체.
+    각 항목의 href="REPLACE_URL" 를 실제 주소로,
+    제목/한 줄 설명을 실제 내용으로 바꾸면 됨.
+  -->
+  <ul>
+    <li><a href="REPLACE_URL" target="_blank">[글 제목 1]</a><br><span class="dim">[한 줄 설명]</span></li>
+    <li><a href="REPLACE_URL" target="_blank">[글 제목 2]</a><br><span class="dim">[한 줄 설명]</span></li>
+    <li><a href="REPLACE_URL" target="_blank">[글 제목 3]</a><br><span class="dim">[한 줄 설명]</span></li>
+    <li><a href="REPLACE_URL" target="_blank">[글 제목 4]</a><br><span class="dim">[한 줄 설명]</span></li>
+    <li><a href="REPLACE_URL" target="_blank">[글 제목 5]</a><br><span class="dim">[한 줄 설명]</span></li>
+    <li><a href="REPLACE_URL" target="_blank">[글 제목 6]</a><br><span class="dim">[한 줄 설명]</span></li>
+    <li><a href="REPLACE_URL" target="_blank">[글 제목 7]</a><br><span class="dim">[한 줄 설명]</span></li>
+    <li><a href="REPLACE_URL" target="_blank">[글 제목 8]</a><br><span class="dim">[한 줄 설명]</span></li>
+  </ul>
+</section>
+
+<!-- SECTION: Research -->
+<section id="research">
+  <a class="back" href="#" onclick="goHome(); return false;">← Back</a>
+  <h2>Research Interests</h2>
+
+  <ul>
+    <li>
+      <strong>Quantum Computing (Qiskit)</strong>
+      <br><span class="dim">Exploring quantum circuits and variational algorithms, and their connections to classical ML optimization.</span>
+    </li>
+    <li>
+      <strong>AI &amp; Applied Mathematics</strong>
+      <br><span class="dim">Self-directed study: linear algebra, probability, and information theory as foundations for modern ML architectures.</span>
+    </li>
+  </ul>
+</section>
+
+<script>
+  var home = document.getElementById('home');
+  var sections = document.querySelectorAll('section');
+
+  function show(id) {
+    home.style.display = 'none';
+    sections.forEach(function(s) { s.style.display = 'none'; });
+    document.getElementById(id).style.display = 'block';
+  }
+
+  function goHome() {
+    sections.forEach(function(s) { s.style.display = 'none'; });
+    home.style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
