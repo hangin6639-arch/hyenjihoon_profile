@@ -178,16 +178,20 @@
       --glass-scale-x: 1;
       --glass-scale-y: 1;
       --glass-origin: center;
+      --bar-gutter: clamp(32px, 10vw, 48px);
+      --bar-height: clamp(54px, 15.9vw, 66px);
+      --tab-icon-size: clamp(22px, 6.15vw, 25px);
       --tab-slot: calc((100% - 6px) / 4);
-      --lens-width: calc(var(--tab-slot) - 18px);
+      --lens-width: calc(var(--tab-slot) + 4px);
+      --lens-left: calc(3px + (var(--tab-slot) - var(--lens-width)) / 2);
       position: fixed;
       z-index: 200;
       left: 50%;
-      bottom: calc(8px + env(safe-area-inset-bottom));
+      bottom: calc(clamp(12px, 4.1vw, 18px) + env(safe-area-inset-bottom));
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      width: min(calc(100% - 24px), 430px);
-      height: 58px;
+      width: min(calc(100% - var(--bar-gutter)), 430px);
+      height: var(--bar-height);
       padding: 3px;
       box-sizing: border-box;
       border: 1px solid rgba(255, 255, 255, 0.24);
@@ -208,9 +212,9 @@
       content: "";
       position: absolute;
       z-index: 0;
-      top: 4px;
-      bottom: 4px;
-      left: 12px;
+      top: 3px;
+      bottom: 3px;
+      left: var(--lens-left);
       width: var(--lens-width);
       border: 1px solid rgba(255, 255, 255, 0.52);
       border-radius: 999px;
@@ -226,9 +230,9 @@
     .liquid-lens-edge {
       position: absolute;
       z-index: 3;
-      top: 3px;
-      bottom: 3px;
-      left: 12px;
+      top: 2px;
+      bottom: 2px;
+      left: var(--lens-left);
       width: var(--lens-width);
       box-sizing: border-box;
       padding: 3px;
@@ -301,12 +305,12 @@
       flex-direction: column;
       gap: 2px;
       min-width: 0;
-      height: 52px;
+      height: calc(var(--bar-height) - 6px);
       align-items: center;
       justify-content: center;
       border-radius: 999px;
       color: #526071;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
       font-family: inherit;
       line-height: 1;
@@ -314,9 +318,9 @@
       -webkit-tap-highlight-color: transparent;
     }
     .mobile-tabbar .tab-icon {
-      width: 20px;
-      height: 20px;
-      flex: 0 0 20px;
+      width: var(--tab-icon-size);
+      height: var(--tab-icon-size);
+      flex: 0 0 var(--tab-icon-size);
       overflow: visible;
       fill: none;
       stroke: currentColor;
