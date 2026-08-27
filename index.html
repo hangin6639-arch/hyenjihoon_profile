@@ -187,7 +187,7 @@
       position: fixed;
       z-index: 200;
       left: 50%;
-      bottom: calc(clamp(12px, 4.1vw, 18px) + env(safe-area-inset-bottom));
+      bottom: calc(clamp(18px, 5.6vw, 24px) + env(safe-area-inset-bottom));
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       width: min(calc(100% - var(--bar-gutter)), 430px);
@@ -229,7 +229,7 @@
     }
     .liquid-lens-edge {
       position: absolute;
-      z-index: 3;
+      z-index: 4;
       top: 2px;
       bottom: 2px;
       left: var(--lens-left);
@@ -252,6 +252,29 @@
       transform-origin: var(--glass-origin) center;
       transition: transform 430ms cubic-bezier(.18, 1.28, .3, 1), opacity 180ms ease;
       will-change: transform;
+    }
+    .lens-color-layer {
+      position: absolute;
+      z-index: 3;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      padding: 3px;
+      box-sizing: border-box;
+      pointer-events: none;
+      clip-path: inset(3px calc(100% - var(--lens-left) - var(--active-offset) - var(--lens-width)) 3px calc(var(--lens-left) + var(--active-offset)) round 999px);
+      transition: clip-path 430ms cubic-bezier(.18, 1.28, .3, 1);
+      will-change: clip-path;
+    }
+    .mobile-tabbar .lens-color-layer a,
+    .mobile-tabbar .lens-color-layer a.active,
+    .mobile-tabbar .lens-color-layer a.preview {
+      color: #0080f6;
+    }
+    .mobile-tabbar.is-pressing .lens-color-layer,
+    .mobile-tabbar.is-dragging .lens-color-layer {
+      clip-path: inset(0 calc(100% - var(--lens-left) - var(--active-offset) - var(--lens-width) - 20px) 0 calc(var(--lens-left) + var(--active-offset) - 20px) round 999px);
+      transition: none;
     }
     .chromium-refraction .liquid-lens-edge {
       padding: 0;
@@ -732,6 +755,18 @@
   var mobileTabbar = document.querySelector('.mobile-tabbar');
   var lensPosition = 0;
 
+  var lensColorLayer = document.createElement('span');
+  lensColorLayer.className = 'lens-color-layer';
+  lensColorLayer.setAttribute('aria-hidden', 'true');
+  mobileTabbar.querySelectorAll(':scope > a').forEach(function(link) {
+    var clone = link.cloneNode(true);
+    clone.removeAttribute('href');
+    clone.removeAttribute('aria-current');
+    clone.setAttribute('tabindex', '-1');
+    lensColorLayer.appendChild(clone);
+  });
+  mobileTabbar.appendChild(lensColorLayer);
+
   function setLensPosition(position) {
     lensPosition = position;
     var barWidth = mobileTabbar.clientWidth;
@@ -935,8 +970,8 @@
   var tabDragPosition = 0;
 
   function setTabPreview(index) {
-    mobileTabbar.querySelectorAll('a').forEach(function(link, linkIndex) {
-      link.classList.toggle('preview', linkIndex === index);
+    mobileTabbar.querySelectorAll('a[data-section]').forEach(function(link) {
+      link.classList.toggle('preview', link.dataset.section === tabOrder[index]);
     });
   }
 
