@@ -467,6 +467,12 @@
     .back:active::before,
     .project-category:active img { transform: none; }
   }
+  .home-name-link { color: inherit; text-decoration: none; }
+  .home-name-link:focus-visible {
+    outline: 2px solid #0080f6;
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
 </style>
 </head>
 <body>
@@ -552,7 +558,7 @@
 
 <!-- HOME VIEW -->
 <div id="home">
-  <h1>현지훈 / Jihun Hyun</h1>
+  <h1><a class="home-name-link" href="https://www.instagram.com/hyenji_051209/">현지훈 / Jihun Hyun</a></h1>
   <p data-i18n="home.summary">한줄 요약 : 문제 정의 후, 각 분야의 전공자들의 특장점을 조율하여 프로덕트를 만들어왔습니다.</p>
 </div>
 
@@ -1181,6 +1187,58 @@
     if (window.innerWidth <= 620 && event.detail !== 0) event.preventDefault();
   });
   window.addEventListener('resize', function() { setLensPosition(lensPosition); });
+
+  // Home Instagram easter egg: an extra downward gesture at the bottom.
+  (function() {
+    var instagramUrl = 'https://www.instagram.com/hyenji_051209/';
+    var wheelDistance = 0;
+    var lastWheelTime = 0;
+    var touchStart = null;
+    var leaving = false;
+
+    function atHomeBottom() {
+      var page = document.scrollingElement || document.documentElement;
+      return currentSection === 'home' &&
+        page.scrollTop + window.innerHeight >= page.scrollHeight - 4;
+    }
+    function onControl(target) {
+      return target && target.closest && target.closest('a, button, nav, input, textarea, select');
+    }
+    function openInstagram() {
+      if (leaving) return;
+      leaving = true;
+      window.location.assign(instagramUrl);
+    }
+    window.addEventListener('wheel', function(event) {
+      if (event.ctrlKey || onControl(event.target) || !atHomeBottom() ||
+          event.deltaY <= 0 || Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
+        wheelDistance = 0;
+        return;
+      }
+      if (event.timeStamp - lastWheelTime > 500) wheelDistance = 0;
+      lastWheelTime = event.timeStamp;
+      var unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
+      wheelDistance += event.deltaY * unit;
+      if (wheelDistance >= 160) openInstagram();
+    }, { passive: true });
+    window.addEventListener('touchstart', function(event) {
+      touchStart = null;
+      if (event.touches.length !== 1 || onControl(event.target) || !atHomeBottom()) return;
+      touchStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+    }, { passive: true });
+    window.addEventListener('touchend', function(event) {
+      var start = touchStart;
+      touchStart = null;
+      if (!start || !atHomeBottom() || event.changedTouches.length !== 1) return;
+      var dx = event.changedTouches[0].clientX - start.x;
+      var dy = start.y - event.changedTouches[0].clientY;
+      if (dy >= 90 && dy > Math.abs(dx)) openInstagram();
+    }, { passive: true });
+    window.addEventListener('touchcancel', function() { touchStart = null; }, { passive: true });
+    window.addEventListener('hashchange', function() { wheelDistance = 0; touchStart = null; });
+    window.addEventListener('pageshow', function() { leaving = false; wheelDistance = 0; touchStart = null; });
+  })();
+  // End home Instagram easter egg.
 
   var initialLanguage = 'ko';
   try { initialLanguage = localStorage.getItem('portfolio-language') || 'ko'; } catch (error) {}
