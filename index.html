@@ -445,6 +445,28 @@
     outline: 3px solid #0080f6;
     outline-offset: 3px;
   }
+  /* Image links: replace the browser tap rectangle with image feedback. */
+  .back,
+  .project-category {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .back::before,
+  .project-category img {
+    transition: transform 120ms ease, opacity 120ms ease;
+    transform-origin: center;
+  }
+  .back:active::before,
+  .project-category:active img {
+    transform: scale(0.96);
+    opacity: 0.76;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .back::before,
+    .project-category img { transition: none; }
+    .back:active::before,
+    .project-category:active img { transform: none; }
+  }
 </style>
 </head>
 <body>
